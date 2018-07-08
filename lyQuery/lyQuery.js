@@ -219,6 +219,24 @@ lyQuery.prototype.bind = function(evType, fn) {
     }
 };
 
+// 获取鼠标位置
+lyQuery.prototype.mousePosition(e) {
+    // IE9以上的浏览器获取　　
+    if (e.pageX || e.pageY) {　　
+        return {
+            x: e.pageX,
+            y: e.pageY
+        };　　
+    }　　
+    //IE9以下
+    //IE中document文档实际并不在(0,0)的位置，在它周围有一个小（通常有2px）边框，document.body.clientLeft和document.body.clientTop包含了这个边框的宽度　　
+    return {
+        x: e.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y: e.clientY + document.body.scrollTop - document.body.clientTop　　
+    };　　
+};
+
+
 /**
  * 事件绑定
  * @param  {[type]}   obj [事件的绑定对象]
