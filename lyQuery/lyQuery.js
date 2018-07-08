@@ -217,10 +217,11 @@ lyQuery.prototype.bind = function(evType, fn) {
     for (i = 0; i < this.elements.length; i++) {
         myAddEvent(this.elements[i], evType, fn);
     }
+    return this;
 };
 
 // 获取鼠标位置
-lyQuery.prototype.mousePosition(e) {
+function mousePosition (e) {
     // IE9以上的浏览器获取　　
     if (e.pageX || e.pageY) {　　
         return {
