@@ -7,12 +7,23 @@
     <title>测试</title>
 </head>
 <body>
-    <div id="box"></div>
+    <div id="box">dfs</div>
+
     <script src="./lyQuery.js"></script>
     <script>
         $(function (){
+            var i = 0;
            $('#box').css('background', 'red').css('width', '200px').css('height', '200px').css('margin', '10px');
+
+           $(document).mousemove(function(){
+                this.onmousemove = function(ev) {
+                    console.log( mousePos(ev) )
+                };
+           });
         });
+
+        
+        
     </script>
 </body>
 </html>

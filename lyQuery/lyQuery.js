@@ -217,11 +217,27 @@ lyQuery.prototype.bind = function(evType, fn) {
     for (i = 0; i < this.elements.length; i++) {
         myAddEvent(this.elements[i], evType, fn);
     }
-    return this;
 };
 
+
+/**
+ *  $(document).mousemove(function(){
+            this.onmousemove = function(ev) {
+                console.log( mousePos(ev) )
+            };
+        });
+ * @param {*} fn 
+ */
+lyQuery.prototype.mousemove = function (fn) {
+    var i = 0;
+    for (i = 0; i < this.elements.length; i++) {
+        myAddEvent(this.elements[i], 'mousemove', fn);
+    }
+};
+
+
 // 获取鼠标位置
-function mousePosition (e) {
+function mousePos (e) {
     // IE9以上的浏览器获取　　
     if (e.pageX || e.pageY) {　　
         return {
@@ -236,7 +252,6 @@ function mousePosition (e) {
         y: e.clientY + document.body.scrollTop - document.body.clientTop　　
     };　　
 };
-
 
 /**
  * 事件绑定
