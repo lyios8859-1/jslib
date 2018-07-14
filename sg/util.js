@@ -132,9 +132,7 @@ function insertAfterText(textDom, value) {
         var width = docEl.getBoundingClientRect().width;
         if (width > 540) { // 最大宽度
             width = 540;
-        }
-        var rem = width / 10; // 将屏幕宽度分成10份， 1份为1rem
-        docEl.style.fontSize = rem + 'px';
+        }        docEl.style.fontSize = rem + 'px';
     }
 
     win.addEventListener('resize', function() {

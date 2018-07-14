@@ -229,12 +229,10 @@ lyQuery.prototype.bind = function(evType, fn) {
  * @param {*} fn 
  */
 lyQuery.prototype.mousemove = function (fn) {
-    var i = 0;
-    for (i = 0; i < this.elements.length; i++) {
+    for (var i = 0; i < this.elements.length; i++) {
         myAddEvent(this.elements[i], 'mousemove', fn);
     }
 };
-
 
 // 获取鼠标位置
 function mousePos (e) {
@@ -262,11 +260,12 @@ function mousePos (e) {
  */
 function myAddEvent(obj, evType, fn) {
     if (obj.attachEvent) {
-        obj.attachEvent('on' + evType, function() {
+        obj.attachEvent('on' + evType, function(ev) {
             if (false == fn.call(obj)) {
-                event.cancelBubble = true;
+                ev.cancelBubble = true;
                 return false;
             }
+            return ev;
         });
     } else {
         obj.addEventListener(evType, function(ev) {
@@ -274,6 +273,7 @@ function myAddEvent(obj, evType, fn) {
                 ev.cancelBubble = true;
                 ev.preventDefault();
             }
+            return ev;
         }, false);
     }
 }

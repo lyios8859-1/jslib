@@ -16,10 +16,11 @@
            $('#box').css('background', 'red').css('width', '200px').css('height', '200px').css('margin', '10px');
 
            $(document).mousemove(function(){
-                this.onmousemove = function(ev) {
-                    console.log( mousePos(ev) )
-                };
-           });
+            this.onclick = function(ev) {
+                console.log( mousePos(ev) )
+            };
+        });
+        
         });
 
         
