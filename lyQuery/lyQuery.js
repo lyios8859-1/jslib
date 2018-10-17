@@ -234,6 +234,71 @@ lyQuery.prototype.mousemove = function (fn) {
     }
 };
 
+/**
+ * [each forEach模拟]
+ * @param  {[type]}   object   [行操作的对象]
+ * @param  {Function} callback [进行操作的函数fn]
+ * @param  {[type]}   args     [函数的参数]
+ * @return {[type]}            [description]
+ */
+lyQuery.prototype.each =  function (object, callback, args) {
+//该方法有三个参数:进行操作的对象obj，进行操作的函数fn，函数的参数args
+var name, i = 0,length = object.length;
+if (args) {
+  if (length == undefined) {
+    for (name in object) {
+      if (callback.apply(object[name], args) === false) {
+        break;
+      }
+    }
+  }
+  else{
+    for (; i < length;) {
+      if (callback.apply(object[i++], args) === false) {
+        break;
+      }
+    }
+  }
+}
+else{
+  if (length == undefined) {
+    for (name in object) {
+      if (callback.call(object[name], name, object[name]) === false) {
+        break;
+      }
+    }
+  }
+  else{
+    for (var value = object[0]; i < length && callback.call(value, i, value) !==false; value = object[++i]) {}
+      /*
+      object[0]取得jQuery对象中的第一个DOM元素，通过for循环，
+      得到遍历整个jQuery对象中对应的每个DOM元素，通过 callback.call( value,i,value);
+      将callback的this对象指向value对象，并且传递两个参数,i表示索引值，value表示DOM元素；
+      其中callback是类似于 function(index, elem) { ... } 的方法。
+      所以就得到 $("...").each(function(index, elem){ ... });
+      */
+    }
+  }
+  return object;
+};
+
+
+// // 简单的each
+// var each = function (arr, fn) {
+//     for (var i = 0; i < arr.length; i++) { 
+//         var val = arr[i]; 
+//         if (fn.call(val, i, val, arr)) { 
+//             return false; 
+//         } 
+//     } 
+// } 
+
+
+
+
+
+
+
 // 获取鼠标位置
 function mousePos (e) {
     // IE9以上的浏览器获取　　
